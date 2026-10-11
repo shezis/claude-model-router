@@ -1,0 +1,12 @@
+{
+  "name": "claude-model-router",
+  "owner": { "name": "shezis" },
+  "description": "Claude Code mods for spending less on models",
+  "plugins": [
+    {
+      "name": "model-router",
+      "source": "./",
+      "description": "Routes simple turns and subagents to cheaper models, never above the model you picked"
+    }
+  ]
+}

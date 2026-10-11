@@ -1,0 +1,60 @@
+{
+  "name": "model-router",
+  "version": "0.2.0",
+  "description": "Routes each turn and subagent to a cheaper model when the task is simple, never above the model you picked",
+  "author": {
+    "name": "shezis"
+  },
+  "homepage": "https://github.com/shezis/claude-model-router",
+  "repository": "https://github.com/shezis/claude-model-router",
+  "license": "MIT",
+  "keywords": [
+    "cost",
+    "models",
+    "routing",
+    "subagents"
+  ],
+  "userConfig": {
+    "mode": {
+      "type": "string",
+      "title": "Routing mode",
+      "description": "auto: route main-loop turns and subagents; subagents: route subagents only (keeps the main loop's prompt cache intact); off: do nothing",
+      "options": [
+        "auto",
+        "subagents",
+        "off"
+      ],
+      "default": "auto"
+    },
+    "lightModel": {
+      "type": "string",
+      "title": "Model for light tasks",
+      "description": "Lookups, explanations, renames, formatting, small edits",
+      "default": "haiku"
+    },
+    "standardModel": {
+      "type": "string",
+      "title": "Model for standard tasks",
+      "description": "Routine implementation, bug fixes, tests. Heavy tasks always keep the session's own model",
+      "default": "sonnet"
+    },
+    "routedAgents": {
+      "type": "string",
+      "title": "Subagent types to route",
+      "description": "Comma-separated agent types whose model the router may choose when the caller named none",
+      "default": "general-purpose,Explore,claude"
+    },
+    "useClassifier": {
+      "type": "boolean",
+      "title": "Ask a small model when the keyword rules are unsure",
+      "description": "Costs one small-model call per ambiguous prompt",
+      "default": false
+    },
+    "escalateAfterSteps": {
+      "type": "number",
+      "title": "Escalate after this many model requests in one turn",
+      "description": "A routed turn that keeps going is probably harder than it looked: from this step on it moves up one tier",
+      "default": 12
+    }
+  }
+}
